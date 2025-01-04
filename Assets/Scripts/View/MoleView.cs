@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UniRx;
 
@@ -5,6 +6,11 @@ public class MoleView : MonoBehaviour
 {
     [SerializeField] private float rayDistance = 15f;
     [SerializeField] private string moleTag = "Mole";
+    
+    // イベント
+    public IObservable<Unit> OnClickMole => _onClickMole;
+    
+    private readonly Subject<Unit> _onClickMole = new Subject<Unit>();
     
     private void Start()
     {
@@ -30,7 +36,8 @@ public class MoleView : MonoBehaviour
                     // モグラがクリックされていた場合の処理
                     Debug.Log("モグラがクリックされました");
                     
-                    // TODO --> !!! ここでモグラを叩いたことを通知する処理を追加 !!!
+                    // イベントを発行
+                    _onClickMole.OnNext(Unit.Default);
                 }
             })
             .AddTo(this);
