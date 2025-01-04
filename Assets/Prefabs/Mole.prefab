@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8767319300168053135}
   - component: {fileID: 7127967996760419917}
   - component: {fileID: 3890361172130759076}
+  - component: {fileID: -2395036401496870604}
   m_Layer: 0
   m_Name: Mole
   m_TagString: Mole
@@ -196,3 +197,15 @@ PolygonCollider2D:
       - {x: -0.5466667, y: -0.035}
       - {x: -0.5466667, y: 0.045}
   m_UseDelaunayMesh: 0
+--- !u!114 &-2395036401496870604
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8235621950714407562}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d364e018754cb2046bd2b458b174597e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
