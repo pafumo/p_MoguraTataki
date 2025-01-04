@@ -1,18 +1,21 @@
 using UniRx;
 
-public static class ScoreModel
+namespace Model
 {
-    // ゲームのスコア
-    public static IReadOnlyReactiveProperty<int> Score => _score;
-
-    private static readonly IntReactiveProperty _score = new IntReactiveProperty(0);
-    
-    /// <summary>
-    /// 叩いたモグラの数を加算する
-    /// モグラの数 = スコア となるのでインクリメント処理にしている
-    /// </summary>
-    public static void AddScore()
+    public static class ScoreModel
     {
-        _score.Value ++;
+        // ゲームのスコア
+        public static IReadOnlyReactiveProperty<int> Score => _score;
+
+        private static readonly IntReactiveProperty _score = new IntReactiveProperty(0);
+    
+        /// <summary>
+        /// 叩いたモグラの数を加算する
+        /// モグラの数 = スコア となるのでインクリメント処理にしている
+        /// </summary>
+        public static void AddScore()
+        {
+            _score.Value ++;
+        }
     }
 }
