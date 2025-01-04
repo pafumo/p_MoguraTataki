@@ -20,6 +20,9 @@ namespace View
 
         // モグラのTag名
         [SerializeField] private string moleTag = "Mole";
+        
+        // モグラを生成する時間リスト
+        private List<float> moleSpawnTimeList = new List<float>();
 
         /*
          * イベント
@@ -34,6 +37,7 @@ namespace View
 
         private void Start()
         {
+            // プレイヤーの入力をチェック
             Observable.EveryUpdate()
                 .Where(_ => Input.GetMouseButtonDown(0))
                 .Subscribe(_ =>
@@ -65,6 +69,23 @@ namespace View
                 })
                 .AddTo(this);
         }
+        
+        /// <summary>
+        /// モグラの生成を開始
+        /// </summary>
+        [ContextMenu("StartSpawnMole")] // デバッグ用
+        public void StartSpawnMole()
+        {
+            // モグラの生成時間リストを生成
+            CreateRandomTimeList();
+            
+            foreach (var spawnTime in moleSpawnTimeList)
+            {
+                Observable.Timer(TimeSpan.FromSeconds(spawnTime))
+                    .Subscribe(_ => SpawnMole())
+                    .AddTo(this);
+            }
+        }
 
         /// <summary>
         /// モグラを生成する
@@ -76,6 +97,38 @@ namespace View
             var randomNum = Random.Range(0, moleSpawnTranList.Count);
             var spawnTran = moleSpawnTranList[randomNum];
             Instantiate(molePrefab, spawnTran.position, Quaternion.identity);
+        }
+
+        /// <summary>
+        /// モグラの生成時間リストを生成する
+        /// </summary>
+        private void CreateRandomTimeList()
+        {
+            // TODO --> !!! 後に別途定義すること !!!
+            var gameTime = 30f;
+            var minInterval = 1f;
+            var maxInterval = 3f;
+            // TODO --> !!! ここまで !!!
+            
+            var spawnTime = 0f;
+            
+            while (true)
+            {
+                // ランダムな間隔を生成
+                var interval = (float)Math.Round(
+                    new System.Random().NextDouble() * (maxInterval - minInterval) + minInterval,
+                    1
+                );
+                
+                // 生成時間を計算
+                spawnTime += interval;
+                
+                // 生成時間が1プレイの時間を超える場合は終了
+                if (spawnTime > gameTime) break;
+                
+                // モグラの生成時間として追加
+                moleSpawnTimeList.Add(spawnTime);
+            }
         }
 
         /// <summary>
