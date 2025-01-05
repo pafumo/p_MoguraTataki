@@ -1,18 +1,21 @@
 using Definitions.Enums;
 using UniRx;
 
-public static class GameStatusModel
+namespace Model
 {
-    // ゲームの状態
-    public static IReadOnlyReactiveProperty<GameStatus> GameStatus => _gameStatus;
-
-    private static readonly ReactiveProperty<GameStatus> _gameStatus = new(Definitions.Enums.GameStatus.PreGame);
-    
-    /// <summary>
-    /// ゲームの状態を変更する
-    /// </summary>
-    public static void ChangeGameStatus(GameStatus gameStatus)
+    public static class GameStatusModel
     {
-        _gameStatus.Value = gameStatus;
+        // ゲームの状態
+        public static IReadOnlyReactiveProperty<GameStatus> GameStatus => _gameStatus;
+
+        private static readonly ReactiveProperty<GameStatus> _gameStatus = new(Definitions.Enums.GameStatus.PreGame);
+    
+        /// <summary>
+        /// ゲームの状態を変更する
+        /// </summary>
+        public static void ChangeGameStatus(GameStatus gameStatus)
+        {
+            _gameStatus.Value = gameStatus;
+        }
     }
 }

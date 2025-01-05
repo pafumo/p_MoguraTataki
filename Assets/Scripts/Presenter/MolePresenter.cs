@@ -1,5 +1,6 @@
 using System;
 using Definitions.Enums;
+using Model;
 using UniRx;
 using UnityEngine;
 using View;
