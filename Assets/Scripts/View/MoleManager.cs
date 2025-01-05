@@ -107,7 +107,7 @@ namespace View
             // TODO --> !!! 後に別途定義すること !!!
             var gameTime = 30f;
             var minInterval = 1f;
-            var maxInterval = 3f;
+            var maxInterval = 2f;
             // TODO --> !!! ここまで !!!
             
             var spawnTime = 0f;
@@ -138,6 +138,20 @@ namespace View
         private void RemoveMole(GameObject mole)
         {
             Destroy(mole);
+        }
+
+
+        /// <summary>
+        /// Scene上のモグラをすべて削除する
+        /// </summary>
+        public void RemoveAllMoles()
+        {
+            GameObject[] moles = GameObject.FindGameObjectsWithTag(moleTag);
+
+            foreach (var mole in moles)
+            {
+                Destroy(mole);
+            }
         }
     }
 }

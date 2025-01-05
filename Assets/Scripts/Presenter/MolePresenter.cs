@@ -20,6 +20,16 @@ namespace Presenter
                     MoleManager.Instance.StartSpawnMole();
                 })
                 .AddTo(this);
+            
+            // ゲームが終了状態になった時の処理
+            GameStatusModel.GameStatus
+                .Where(gameStatus => gameStatus == GameStatus.GameOver)
+                .Subscribe(_ =>
+                {
+                    // Scene上にモグラが残っている場合は削除
+                    MoleManager.Instance.RemoveAllMoles();
+                })
+                .AddTo(this);
         }
     }
 }
